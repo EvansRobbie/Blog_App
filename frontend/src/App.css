@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base{
+    body{
+        @apply bg-slate-100 text-slate-900
+    }
+    input{
+        @apply rounded-2xl outline-none px-4 py-1 
+    }
+    label{
+        @apply font-medium text-slate-900 px-4 text-sm md:text-base
+    }
+    .registration{
+        @apply bg-cyan-500 flex justify-center items-center rounded-full relative py-1 w-full my-2 active:scale-105 text-slate-100 font-medium hover:shadow-2xl shadow-slate-900
+    }
+    
+}
