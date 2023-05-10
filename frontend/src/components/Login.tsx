@@ -1,15 +1,27 @@
+import {useState} from 'react'
+import axios from 'axios'
 import Button from "./Button"
 
 const Login = ({handleToggle}:{handleToggle:()=> void}) => {
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+  const onSubmit = (e:React.FormEvent<HTMLFormElement>) =>{
+    e.preventDefault()
+    axios.post('/login', {
+      username, 
+      password
+    })
+  }
+
   return (
-    <form action="">
+    <form onSubmit={onSubmit}>
         <div className="flex flex-col w-full gap-2">
         <label htmlFor="username">Username</label>
-        <input className="" type="text" id="username" />
+        <input onChange={(e)=>setUsername(e.target.value)} value={username} className="" type="text" id="username" />
         </div>
         <div className="flex flex-col gap-2">
         <label htmlFor="password">Password</label>
-        <input type="text" id="password" />
+        <input onChange={(e)=>setPassword(e.target.value)} value={password} type="text" id="password" />
         </div>
         <div className="flex flex-row-reverse justify-start gap-2">
         <label htmlFor="check">Remember me</label>

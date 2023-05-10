@@ -1,19 +1,39 @@
+import { useState } from "react"
 import Button from "./Button"
+import axios from "axios"
 
 const Register = ({handleToggle}:{handleToggle:()=> void}) => {
+  const [username, setUsername] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const onSubmit = async (e:React.FormEvent<HTMLFormElement>) =>{
+      e.preventDefault()
+      // const data = 
+      try{
+        await  axios.post('/register',{
+          username, 
+          email,
+           password
+        } )
+        alert('Registration Successful')
+      }catch(e){
+        console.log(e)
+        alert('Registration Failed')
+      }
+  }
   return (
-    <form action="">
+    <form onSubmit={onSubmit}>
         <div className="flex flex-col w-full gap-2">
                     <label htmlFor="username">Username</label>
-                    <input type="text" id="username" />
+                    <input value={username} onChange={(e)=>setUsername(e.target.value)} type="text" id="username" />
                     </div>
                     <div className="flex flex-col w-full gap-2">
                     <label htmlFor="email">Email</label>
-                    <input type="text" id="email" />
+                    <input value={email} onChange={(e)=>setEmail(e.target.value)} type="text" id="email" />
                     </div>
                     <div className="flex flex-col gap-2">
                     <label htmlFor="password">Password</label>
-                    <input type="text" id="password" />
+                    <input value={password} onChange={(e)=>setPassword(e.target.value)} type="text" id="password" />
                     </div>
                     <div className="flex flex-row-reverse justify-start gap-2">
                     <label htmlFor="check">Remember me</label>
