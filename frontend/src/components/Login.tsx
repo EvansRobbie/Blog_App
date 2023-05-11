@@ -5,12 +5,19 @@ import Button from "./Button"
 const Login = ({handleToggle}:{handleToggle:()=> void}) => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-  const onSubmit = (e:React.FormEvent<HTMLFormElement>) =>{
+  const onSubmit = async (e:React.FormEvent<HTMLFormElement>) =>{
     e.preventDefault()
-    axios.post('/login', {
-      username, 
-      password
-    })
+    try{
+
+    await  axios.post('/login', {
+        username, 
+        password
+      
+      })
+    }catch(e){
+      alert('Login Failed')
+    }
+  //  console.log(data)
   }
 
   return (
