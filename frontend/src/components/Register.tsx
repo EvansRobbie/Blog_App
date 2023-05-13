@@ -2,7 +2,7 @@ import { useState } from "react"
 import Button from "./Button"
 import axios from "axios"
 
-const Register = ({handleToggle}:{handleToggle:()=> void}) => {
+const Register = ({setToggle, handleToggle}:{setToggle:React.Dispatch<React.SetStateAction<boolean>>, handleToggle:()=> void}) => {
   const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -13,11 +13,15 @@ const Register = ({handleToggle}:{handleToggle:()=> void}) => {
         await  axios.post('/register',{
           username, 
           email,
-           password
+          password
         } )
-        alert('Registration Successful')
+        setToggle(false)
+        setUsername('')
+        setEmail('')
+        setPassword('')
+        // alert('Registration Successful')
       }catch(e){
-        console.log(e)
+        // console.log(e)
         alert('Registration Failed')
       }
   }

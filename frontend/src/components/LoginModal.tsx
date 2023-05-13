@@ -64,10 +64,10 @@ const style= {
             
               <animated.div ref={ref}  style={styles}  className="max-w-2xl relative items-center  mx-4  md:mx-auto z-0 bg-slate-100 overflow-hidden justify-around shadow-2xl shadow-slate-900 flex grow shrink-0 py-6 px-4 rounded-2xl">
                 <div className= {`${toggle? 'flex': 'hidden' } md:flex flex-col gap-2 py-2 md:py-0 md:px-0 px-10 `}>
-                   <Login handleToggle={handleToggle}/>
+                   <Login setShowModal ={setShowModal} handleToggle={handleToggle}/>
                 </div>
                 <div className={`${toggle ? 'hidden': 'flex' } md:flex flex-col gap-2 py-2 md:py-0 md:px-0 px-10  `}>
-                    <Register handleToggle={handleToggle}/>
+                    <Register setToggle={setToggle} handleToggle={handleToggle}/>
                 </div>
                 <animated.div
                 ref= {cardEl}

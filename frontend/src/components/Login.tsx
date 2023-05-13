@@ -1,22 +1,32 @@
 import {useState} from 'react'
+import { useNavigate} from 'react-router-dom'
 import axios from 'axios'
 import Button from "./Button"
+import { useUserContext } from '../context/UserContext'
 
-const Login = ({handleToggle}:{handleToggle:()=> void}) => {
+const Login = ({handleToggle, setShowModal}:{handleToggle:()=> void, setShowModal:React.Dispatch<React.SetStateAction<boolean>>}) => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const {setUser} = useUserContext()
+  const navigate = useNavigate()
   const onSubmit = async (e:React.FormEvent<HTMLFormElement>) =>{
     e.preventDefault()
     try{
 
-    await  axios.post('/login', {
+   const {data} =  await  axios.post('/login', {
         username, 
         password
       
       })
+      setUser(data)
+      navigate('/')
+      setShowModal(false)
     }catch(e){
       alert('Login Failed')
     }
+    // if(user){
+    //   return <Navigate to={'/'}/>
+    // }
   //  console.log(data)
   }
 

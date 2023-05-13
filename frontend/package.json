@@ -13,8 +13,10 @@
     "@mantine/core": "^6.0.10",
     "@mantine/hooks": "^6.0.10",
     "axios": "^1.4.0",
+    "date-fns": "^2.30.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-quill": "^2.0.0",
     "react-router-dom": "^6.11.1",
     "react-spring": "^9.7.1"
   },
