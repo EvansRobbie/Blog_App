@@ -116,9 +116,12 @@ app.get('/api/posts/:id', async (req, res)=>{
     const {id} = req.params
     res.json(await Post.findById(id).populate('owner', ['username']))
 })
-app.put('/api/posts',uploadMiddleware.single('file'), (req, res)=>{
+app.put('/api/posts/:id',uploadMiddleware.single('file'), (req, res)=>{
+    // res.json({files:req.file})
+    const {id} = req.params
+    const {title, summary, content} = req.body
     let newPath = null
-    if(req.file){
+    if(req.file){ 
         const {path, originalname} = req.file
         const part = originalname.split('.')
         const ext = part[part.length-1]
@@ -133,16 +136,16 @@ app.put('/api/posts',uploadMiddleware.single('file'), (req, res)=>{
     const {token} = req.cookies
     jwt.verify(token, jwtSectret, {}, async (err, userInfo)=>{
         if (err) throw err;
-        const {id,title, summary, content} = req.body
+        
         const postData =await Post.findById(id)
         // res.json(postData)
         // console.log(postData.owner.toString())
         if (userInfo.id === postData.owner.toString()){
-            postData.set({
+        postData.set({
                 title,
                 summary,
                 content,
-                // coverImage:newPath
+                coverImage:newPath ? newPath : postData.coverImage
             })
             await postData.save()
             res.json('ok')

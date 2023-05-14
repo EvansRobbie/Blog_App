@@ -2,7 +2,7 @@ const { Schema, model} = require('mongoose')
 
 const PostSchema = new Schema({
     owner: {type:Schema.Types.ObjectId, ref:'User'},
-    title:{type:String, required:true, unique:true},
+    title:{type:String, unique:true},
     summary:{type:String, required:true},
     content:{type:String, required:true},
     coverImage:{type:String, required:true},

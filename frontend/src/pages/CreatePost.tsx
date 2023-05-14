@@ -22,23 +22,28 @@ const CreatePost = () => {
             setContent(data.content)
         })
     }, [id])
-    const onSubmit = async (e:React.FormEvent<HTMLFormElement>) =>{
-        const data = new FormData()
-        data.set('title', title)
-        data.set('summary', summary)
-        data.set('content', content)
-        if (files && files.length > 0){
-            data.set('file', files?.[0])
-        }
-        e.preventDefault()
-        try{
-            if (id){
-                await axios.put('/posts',{id, ...data})
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    const formData = new FormData()
+    formData.append('title', title)
+    formData.append('summary', summary)
+    formData.append('content', content)
+    if (files) {
+      formData.append('file', files[0])
+    }
+    
+    try {
+      if (id) {
+        // update post
+        await axios.put(`/posts/${id}`, formData)
+        navigate(`/post/${id}`)
+      }else{
+                await axios.post('/posts', formData)
+                // console.log(formData)
+                navigate('/')
 
-            }else{
-                await axios.post('/posts', data)
             }
-            navigate('/')
+           
         }catch(e){
             alert('Post Failed to upload')
         }
