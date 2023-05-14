@@ -152,5 +152,22 @@ app.put('/api/posts/:id',uploadMiddleware.single('file'), (req, res)=>{
         }
     })
 })
+app.delete('/api/posts/:id', async (req, res)=>{
+    const {id} = req.params
+        try {
+            // Delete the post by ID
+            const result = await Post.deleteOne({ _id: id });
+            
+            if (result.deletedCount === 0) {
+              return res.status(404).json({ error: 'Post not found' });
+            }
+            
+        res.json({message: 'Post deleted Successfully'})
+    }catch(e){
+        console.log(e)
+        res.status(500).json({error: 'Internal error'})
+    }
+       
+      })
 
 app.listen(port)
