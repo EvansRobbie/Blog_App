@@ -24,7 +24,7 @@ function App() {
       {showModal && <LoginModal showModal = {showModal} setShowModal = {setShowModal} onChange = {handleModalChange} />}
       <Routes>
         <Route path='/' element={<Home/>}/>
-        <Route path='/create' element={<CreatePost/>}/>
+        <Route path='/create?' element={<CreatePost/>}/>
         <Route path='/create/:id' element={<CreatePost/>}/>
         <Route path = '/post/:id' element={<PostDetail/>}/>
       </Routes>

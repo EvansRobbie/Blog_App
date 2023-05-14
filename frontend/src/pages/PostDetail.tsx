@@ -3,6 +3,7 @@ import { formatISO9075 } from "date-fns";
 import { useEffect, useState } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { useUserContext } from "../context/UserContext";
+import BackButton from "../components/BackButton";
 interface postProp {
   _id: string;
   owner: {
@@ -40,7 +41,7 @@ const PostDetail = () => {
   // console.log(post)
   // if(!post) return '';
   return (
-    <div className="relative my-20 py-6 max-w-6xl px-4 mx-auto flex flex-col gap-4">
+    <div className="relative my-20 py-6 max-w-6xl px-4 mx-auto flex group flex-col gap-4">
       {post && (
         <>
           <div className="pt-2">
@@ -108,6 +109,7 @@ const PostDetail = () => {
           </div>
         </>
       )}
+      <BackButton  />
     </div>
   );
 };
